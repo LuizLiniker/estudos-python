@@ -4,7 +4,7 @@ produtos = [
     {"nome": "Mouse", "quantidade": 12, "preco": 80},
     {"nome": "Teclado", "quantidade": 0, "preco": 150},
     {"nome": "Monitor", "quantidade": 4, "preco": 900},
-    {"nome": "Headset", "quantidade": 8, "preco": 250}
+    {"nome": "Headset", "quantidade": 8, "preco": "inválido"}
 ]
 
 def listar_produtos():
@@ -15,7 +15,27 @@ def calcular_estoque():
     total = 0
 
     for produto in produtos:
-        total += produto["quantidade"] * produto["preco"]
+
+        try:
+
+            preco = float(produto["preco"])
+
+        except ValueError:
+
+            while True:
+                try:
+
+                    preco = float(input("Digite o preço correto: "))
+                    produto["preco"] = preco
+
+                    break
+
+                except ValueError:
+
+                    print("Digite um preço válido.")
+                        
+                
+        total += produto["quantidade"] * preco
 
     print(f"Valor total do estoque: R$ {total}")
 
